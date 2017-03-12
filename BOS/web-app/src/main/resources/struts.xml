@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+
+    <constant name="struts.devMode" value="true"/>
+    <constant name="struts.ui.theme" value="simple"/>
+
+    <package name="common" namespace="/" extends="struts-default" strict-method-invocation="false">
+        <!-- 拦截器配置
+			* 先声明
+			* 配置
+                方法1：每一个action单独使用,需要多次引用，否则默认将被覆盖
+                    <PostAction name="">
+                        <interceptor-ref name="defaultStack"></interceptor-ref>
+                        <interceptor-ref name="loginInterceptor"></interceptor-ref>
+                    </PostAction>
+                方法2：将多个拦截器打包生成自定义栈，action使用栈
+                    * 自定义拦截器栈
+                    <interceptor-stack name="loginStack">
+                        <interceptor-ref name="defaultStack"></interceptor-ref>
+                        <interceptor-ref name="loginInterceptor"></interceptor-ref>
+                    </interceptor-stack>
+                    * action引用
+                    <PostAction name="">
+                        <interceptor-ref name="loginStack"></interceptor-ref>
+                    </PostAction>
+                方法3：将自定义栈，把默认栈覆盖
+                    <default-interceptor-ref name="loginStack"></default-interceptor-ref>
+		-->
+
+        <!--<interceptors>
+            <interceptor name="loginInterceptor" class="com.liuhy.crm.web.interceptor.LoginInterceptor">
+                <param name="excludeMethods">login</param>
+            </interceptor>
+            &lt;!&ndash; 自定义拦截器栈&ndash;&gt;
+            <interceptor-stack name="loginStack">
+                <interceptor-ref name="defaultStack">
+                    &lt;!&ndash; 限制上传文件的扩展名&ndash;&gt;
+                    <param name="fileUpload.allowedExtensions">.xls,.xlsx</param>
+                </interceptor-ref>
+                <interceptor-ref name="loginInterceptor"></interceptor-ref>
+            </interceptor-stack>
+        </interceptors>-->
+
+        <!-- 修改默认的拦截器栈-->
+        <!--<default-interceptor-ref name="loginStack"/>-->
+
+        <!--<global-results>
+            &lt;!&ndash; 如果拦截到用户没有登录，跳转到登录页面&ndash;&gt;
+            <result name="login_fail">index.jsp</result>
+        </global-results>
+-->
+        <!--
+            PostAction.class默认值：ActionSupport
+            PostAction.method默认值：execute
+            result.name默认值
+        -->
+        <action name="page_*_*">
+            <result>WEB-INF/pages/{1}/{2}.jsp</result>
+        </action>
+    </package>
+
+    <!--<include file="struts-classes.xml"/>-->
+</struts>

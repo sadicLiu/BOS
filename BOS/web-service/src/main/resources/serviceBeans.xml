@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!-- 导入dao配置-->
+    <import resource="daoBeans.xml"/>
+
+    <!-- 首先配置事务管理器-->
+    <bean id="txManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <!-- 事务注解-->
+    <tx:annotation-driven transaction-manager="txManager"/>
+
+    <!-- 使用注解的形式就不需要配置下面的东西了-->
+    <!-- 配置事务详情-->
+    <!--<tx:advice id="txAdvice" transaction-manager="txManager">
+        <tx:attributes>
+            <tx:method name="add*"/>
+            <tx:method name="update*"/>
+            <tx:method name="delete*"/>
+            <tx:method name="find*" read-only="true"/>
+        </tx:attributes>
+    </tx:advice>-->
+
+    <!-- 为service添加事务，所有的事务只添加在service层-->
+    <!--<aop:config>
+        <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.liuhy.bos.*.service..*.* (..))"/>
+    </aop:config>-->
+</beans>
