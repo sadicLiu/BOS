@@ -60,6 +60,9 @@
         <action name="page_*_*">
             <result>WEB-INF/pages/{1}/{2}.jsp</result>
         </action>
+        <action name="userAction_*" class="userAction" method="{1}">
+
+        </action>
     </package>
 
     <!--<include file="struts-classes.xml"/>-->
