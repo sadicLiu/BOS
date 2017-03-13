@@ -41,7 +41,7 @@
 				{
 					id : 'add',
 					text : '添加角色',
-					iconCls : 'icon-add',
+					iconCls : 'icon-save',
 					handler : function(){
 						location.href='${pageContext.request.contextPath}/page_admin_role_add.action';
 					}

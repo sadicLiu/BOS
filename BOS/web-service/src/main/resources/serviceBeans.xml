@@ -19,7 +19,7 @@
     <!-- 配置事务详情-->
     <!--<tx:advice id="txAdvice" transaction-manager="txManager">
         <tx:attributes>
-            <tx:method name="add*"/>
+            <tx:method name="save*"/>
             <tx:method name="update*"/>
             <tx:method name="delete*"/>
             <tx:method name="find*" read-only="true"/>

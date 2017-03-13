@@ -33,7 +33,7 @@
 				{
 					id : 'add',
 					text : '添加权限',
-					iconCls : 'icon-add',
+					iconCls : 'icon-save',
 					handler : function(){
 						location.href='${pageContext.request.contextPath}/page_admin_function_add.action';
 					}

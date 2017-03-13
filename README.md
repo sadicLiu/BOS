@@ -30,7 +30,7 @@
 | Struts2   | 最新 | a |
 | Hibernate | 最新 | a |
 | Spring    | 最新 | a |
-| Junit     | 最新 | a |
+| jUnit     | 最新 | a |
 
 ## 搭建开发环境
 
@@ -54,3 +54,26 @@
 5. 配置日志文件
 6. 配置struts2文件
 7. 配置spring文件
+
+## 持久层设计
+
+1. t_uer
+	```
+	CREATE TABLE bos.t_user
+	(
+	    id VARCHAR(32) PRIMARY KEY,
+	    username VARCHAR(20),
+	    password VARCHAR(32),
+	    salary DOUBLE,
+	    birthday DATE,
+	    gender VARCHAR(10),
+	    station VARCHAR(20),
+	    telephone VARCHAR(15),
+	    remark VARCHAR(100)
+	);
+	```
+2. 在idea中使用hibernate反转引擎生成pojo和配置文件
+	- ![view](./assets/view.png)
+	- ![persis](./assets/persis.png)
+	- ![generate](./assets/generate.png)
+3. BaseDao

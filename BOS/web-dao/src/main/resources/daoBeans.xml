@@ -24,14 +24,16 @@
                 <prop key="hibernate.show_sql">true</prop>
                 <prop key="hibernate.format_sql">true</prop>
                 <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <prop key="hibernate.connection.url">jdbc:mysql://localhost:3306/bos</prop>
+                <prop key="hibernate.connection.driver_class">com.mysql.jdbc.Driver</prop>
             </props>
         </property>
         <!-- 注入hibernate映射文件-->
-        <!--<property name="mappingResources">
+        <property name="mappingLocations">
             <list>
-                <value>classpath:com/liuhy/bos/dao</value>
+                <value>classpath:User.hbm.xml</value>
             </list>
-        </property>-->
+        </property>
     </bean>
 
 </beans>

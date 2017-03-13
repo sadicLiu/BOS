@@ -54,9 +54,9 @@
 		iconCls : 'icon-search',
 		handler : doSearch
 	}, {
-		id : 'button-add',
+		id : 'button-save',
 		text : '增加',
-		iconCls : 'icon-add',
+		iconCls : 'icon-save',
 		handler : doAdd
 	}, {
 		id : 'button-edit',	

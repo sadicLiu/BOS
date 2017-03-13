@@ -60,7 +60,7 @@
 	
 	//工具栏
 	var toolbar = [ {
-		id : 'button-add',	
+		id : 'button-save',
 		text : '新增一行',
 		iconCls : 'icon-edit',
 		handler : doAdd

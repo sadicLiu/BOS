@@ -34,9 +34,9 @@
 		iconCls : 'icon-search',
 		handler : doView
 	}, {
-		id : 'button-add',
+		id : 'button-save',
 		text : '新增',
-		iconCls : 'icon-add',
+		iconCls : 'icon-save',
 		handler : doAdd
 	}, {
 		id : 'button-delete',
