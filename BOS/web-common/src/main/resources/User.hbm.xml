@@ -4,7 +4,7 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="com.liuhy.bos.model.User" table="t_user" schema="bos">
+    <class name="com.liuhy.bos.model.User" table="t_user">
         <id name="id" column="id"/>
         <property name="username" column="username"/>
         <property name="password" column="password"/>

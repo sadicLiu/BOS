@@ -7,8 +7,11 @@
 	- [搭建开发环境](#搭建开发环境)
 		- [数据库环境](#数据库环境)
 		- [创建web项目](#创建web项目)
+	- [持久层设计](#持久层设计)
+	- [验证码](#验证码)
+	- [struts2将所有错误信息配置到统一的文件中](#struts2将所有错误信息配置到统一的文件中)
 
-<!-- /TOC -->
+<!-- /TOC -->thFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
 # javaee-bos
 
@@ -77,3 +80,63 @@
 	- ![persis](./assets/persis.png)
 	- ![generate](./assets/generate.png)
 3. BaseDao
+
+## 验证码
+
+1. jsp中
+	```
+	<img id="loginform:vCode" src="${pageContext.request.contextPath }/validatecode.jsp"
+	     onclick="javascript:document.getElementById('loginform:vCode').src='${pageContext.request.contextPath}/validatecode.jsp?'+Math.random();"/>
+	```
+2. 生成验证码的页面
+	```
+	<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
+	<%@ page import="javax.imageio.ImageIO" %>
+	<%@ page import="java.awt.*" %>
+	<%@ page import="java.awt.image.BufferedImage" %>
+	<%@ page import="java.io.OutputStream" %>
+	<%@ page import="java.util.Random" %>
+	<%
+	    int width = 80;
+	    int height = 32;
+	    //create the image
+	    BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+	    Graphics g = image.getGraphics();
+	    // set the background color
+	    g.setColor(new Color(0xDCDCDC));
+	    g.fillRect(0, 0, width, height);
+	    // draw the border
+	    g.setColor(Color.black);
+	    g.drawRect(0, 0, width - 1, height - 1);
+	    // create a random instance to generate the codes
+	    Random rdm = new Random();
+	    String hash1 = Integer.toHexString(rdm.nextInt());
+	    // make some confusion
+	    for (int i = 0; i < 50; i++) {
+	        int x = rdm.nextInt(width);
+	        int y = rdm.nextInt(height);
+	        g.drawOval(x, y, 0, 0);
+	    }
+	    // generate a random code
+	    String capstr = hash1.substring(0, 4);
+	    session.setAttribute("key", capstr);
+	    g.setColor(new Color(0, 100, 0));
+	    g.setFont(new Font("Candara", Font.BOLD, 24));
+	    g.drawString(capstr, 8, 24);
+	    g.dispose();
+	    response.setContentType("image/jpeg");
+	    out.clear();
+	    out = pageContext.pushBody();
+	    OutputStream strm = response.getOutputStream();
+	    ImageIO.write(image, "jpeg", strm);
+	    strm.close();
+	%>
+	```
+
+## struts2将所有错误信息配置到统一的文件中
+
+1. message.properties
+	配置所有信息
+2. struts2配置文件
+	`<constant name="struts.custom.i18n.resources" value="message"/>`
