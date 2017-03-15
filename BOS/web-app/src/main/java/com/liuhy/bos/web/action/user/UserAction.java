@@ -3,6 +3,7 @@ package com.liuhy.bos.web.action.user;
 import com.liuhy.bos.model.User;
 import com.liuhy.bos.web.action.base.BaseAction;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -21,6 +22,7 @@ public class UserAction extends BaseAction<User> {
         if (StringUtils.isNotBlank(checkcode) && checkcode.equals((String) session.get("key"))) {
             User user = userService.login(this.getModel());
             if (null != user) {
+                this.putToSession("loginUser", user);
                 // 如果要登录的用户存在
                 return "home";
             } else {
@@ -31,6 +33,11 @@ public class UserAction extends BaseAction<User> {
             this.addActionError(this.getText("validateCodeError"));
         }
 
+        return "login";
+    }
+
+    public String logout() {
+        ServletActionContext.getRequest().getSession().invalidate();
         return "login";
     }
 }
