@@ -15,4 +15,9 @@
         <property name="telephone" column="telephone"/>
         <property name="remark" column="remark"/>
     </class>
+
+    <!-- 命名查询-->
+    <query name="editPassword">
+        UPDATE User u SET u.password = ? WHERE u.id = ?
+    </query>
 </hibernate-mapping>

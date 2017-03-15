@@ -14,4 +14,6 @@ public interface BaseDao<T> {
 
     List<T> findAll();
 
+    void executeUpdate(String namedQuery, Object... args);
+
 }

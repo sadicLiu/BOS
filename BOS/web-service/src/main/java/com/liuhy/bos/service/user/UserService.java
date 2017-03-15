@@ -4,4 +4,6 @@ import com.liuhy.bos.model.User;
 
 public interface UserService {
     User login(User model);
+
+    void editPassword(User user);
 }

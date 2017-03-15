@@ -140,3 +140,27 @@
 	配置所有信息
 2. struts2配置文件
 	`<constant name="struts.custom.i18n.resources" value="message"/>`
+3. action中引用
+
+## 使用Hibernate命名查询修改密码
+
+1. 在配置文件中定义命名查询
+	```
+	<!-- 命名查询-->
+ 	<query name="editPassword">
+		 	UPDATE User u SET u.password = ? WHERE u.id = ?
+ 	</query>
+	```
+2. 在Dao中使用命名查询
+	```
+	@Override
+	public void executeUpdate(String namedQuery, Object... args) {
+			Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().getNamedQuery(namedQuery);
+
+			for(int i = 0; i < args.length; i++) {
+					query.setParameter(i, args[i]);
+			}
+
+			query.executeUpdate();
+	}
+	```

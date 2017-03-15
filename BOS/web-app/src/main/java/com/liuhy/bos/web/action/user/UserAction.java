@@ -1,11 +1,14 @@
 package com.liuhy.bos.web.action.user;
 
 import com.liuhy.bos.model.User;
+import com.liuhy.bos.utils.MD5Utils;
 import com.liuhy.bos.web.action.base.BaseAction;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+
+import java.io.IOException;
 
 @Controller
 @Scope("prototype")
@@ -39,5 +42,26 @@ public class UserAction extends BaseAction<User> {
     public String logout() {
         ServletActionContext.getRequest().getSession().invalidate();
         return "login";
+    }
+
+    /*
+    * 修改密码
+    * */
+    public String editPassword() throws IOException {
+        User user = (User) session.get("loginUser");
+        user.setPassword(MD5Utils.md5(this.getModel().getPassword()));
+
+        String flag = "1";
+        try {
+            userService.editPassword(user);
+        }
+        catch (Exception e) {
+            flag = "0";
+            e.printStackTrace();
+        }
+
+        ServletActionContext.getResponse().setContentType("text/html");
+        ServletActionContext.getResponse().getWriter().print(flag);
+        return NONE;
     }
 }

@@ -2,6 +2,7 @@ package com.liuhy.bos.dao.base.impl;
 
 import com.liuhy.bos.dao.base.BaseDao;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
 import javax.annotation.Resource;
@@ -45,6 +46,17 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements BaseDao<T> {
     public List<T> findAll() {
         String hql = "FROM " + entityClass.getSimpleName();
         return (List<T>) this.getHibernateTemplate().find(hql);
+    }
+
+    @Override
+    public void executeUpdate(String namedQuery, Object... args) {
+        Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().getNamedQuery(namedQuery);
+
+        for(int i = 0; i < args.length; i++) {
+            query.setParameter(i, args[i]);
+        }
+
+        query.executeUpdate();
     }
 
 }

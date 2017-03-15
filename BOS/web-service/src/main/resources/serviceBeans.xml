@@ -15,7 +15,7 @@
     <!-- 事务注解-->
     <tx:annotation-driven transaction-manager="txManager"/>
 
-    <!-- 使用注解的形式就不需要配置下面的东西了-->
+    <!-- 使用注解的形式就不需要配置下面的东西了,在service上加@Transactional-->
     <!-- 配置事务详情-->
     <!--<tx:advice id="txAdvice" transaction-manager="txManager">
         <tx:attributes>
