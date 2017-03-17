@@ -1,5 +1,7 @@
 package com.liuhy.bos.dao.base;
 
+import com.liuhy.bos.utils.PageBean;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -16,4 +18,5 @@ public interface BaseDao<T> {
 
     void executeUpdate(String namedQuery, Object... args);
 
+    void pageQuery(PageBean pageBean);
 }

@@ -1,8 +1,7 @@
-package com.liuhy.bos.web.action.user;
+package com.liuhy.bos.web.action;
 
 import com.liuhy.bos.model.User;
 import com.liuhy.bos.utils.MD5Utils;
-import com.liuhy.bos.web.action.base.BaseAction;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;

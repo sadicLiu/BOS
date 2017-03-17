@@ -1,7 +1,10 @@
 package com.liuhy.bos.dao.base.impl;
 
 import com.liuhy.bos.dao.base.BaseDao;
+import com.liuhy.bos.utils.PageBean;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Projections;
 import org.hibernate.query.Query;
 import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
@@ -57,6 +60,29 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements BaseDao<T> {
         }
 
         query.executeUpdate();
+    }
+
+    /**
+     * 通用分页查询方法
+     */
+    public void pageQuery(PageBean pageBean) {
+        int currentPage = pageBean.getCurrentPage();
+        int pageSize = pageBean.getPageSize();
+        DetachedCriteria detachedCriteria = pageBean.getDetachedCriteria();
+        //总数据量----select count(*) from bc_staff
+        //改变Hibernate框架发出的sql形式
+        detachedCriteria.setProjection(Projections.rowCount());//select count(*) from bc_staff
+        List<Long> list = (List<Long>) this.getHibernateTemplate().findByCriteria(detachedCriteria);
+        Long total = list.get(0);
+        pageBean.setTotal(total.intValue());//设置总数据量
+        detachedCriteria.setProjection(null);//修改sql的形式为select * from ....
+        //重置表和类的映射关系
+        detachedCriteria.setResultTransformer(DetachedCriteria.ROOT_ENTITY);
+        //当前页展示的数据集合
+        int firstResult = (currentPage - 1) * pageSize;
+        int maxResults = pageSize;
+        List rows = this.getHibernateTemplate().findByCriteria(detachedCriteria, firstResult, maxResults);
+        pageBean.setRows(rows);
     }
 
 }

@@ -1,5 +1,6 @@
-package com.liuhy.bos.web.action.base;
+package com.liuhy.bos.web.action;
 
+import com.liuhy.bos.service.staff.StaffService;
 import com.liuhy.bos.service.user.UserService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -39,15 +40,21 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T>, Sess
     * 注入所有的service
     * */
     public UserService userService;
+    public StaffService staffService;
 
     @Resource
     public void setUserService(UserService userService) {
         this.userService = userService;
     }
 
+    @Resource
+    public void setStaffService(StaffService staffService) {
+        this.staffService = staffService;
+    }
+
     /*
-        * 值栈操作
-        * */
+            * 值栈操作
+            * */
     public void push(Object o) {
         ActionContext.getContext().getValueStack().push(o);
     }

@@ -32,6 +32,10 @@
         <property name="mappingLocations">
             <list>
                 <value>classpath:User.hbm.xml</value>
+                <value>classpath:Staff.hbm.xml</value>
+                <value>classpath:Region.hbm.xml</value>
+                <value>classpath:Decidedzone.hbm.xml</value>
+                <value>classpath:Subarea.hbm.xml</value>
             </list>
         </property>
     </bean>
