@@ -1,5 +1,6 @@
 package com.liuhy.bos.utils;
 
+import com.google.gson.annotations.Expose;
 import org.hibernate.criterion.DetachedCriteria;
 
 import java.util.ArrayList;
@@ -8,8 +9,13 @@ import java.util.List;
 public class PageBean {
     private int currentPage;    // 当前页
     private int pageSize;       // 每页记录数
+
+    @Expose  // json序列化此属性
     private int total;          // 总记录数
+
     private DetachedCriteria detachedCriteria;
+
+    @Expose  // json序列化此属性
     private List rows = new ArrayList(0);   // 查询结果
 
     public int getCurrentPage() {

@@ -164,3 +164,46 @@
 			query.executeUpdate();
 	}
 	```
+
+## 使用Gson序列化PageBean对象，并排除对象中的一些属性
+
+- 在CRM项目中，曾经使用自定义的方式排除了对象中的一个JavaBean对象
+- 这里使用`@Expose`注解
+	1. 首先，在PageBean中为那些需要序列化的属性加上此注解
+		```
+		public class PageBean {
+	    private int currentPage;    // 当前页
+	    private int pageSize;       // 每页记录数
+
+	    @Expose  // json序列化此属性
+	    private int total;          // 总记录数
+
+	    private DetachedCriteria detachedCriteria;
+
+	    @Expose  // json序列化此属性
+	    private List rows = new ArrayList(0);   // 查询结果
+
+			// ...
+		}
+		```
+	2. 注意到，此类中有个rows属性，将来装的是查询出来的对象，比如要将Staff对象转入其中，这时候，同样需要为Staff对象中的属性加上此注解
+		```
+		public class Staff implements java.io.Serializable {
+			@Expose
+			private String id;
+			@Expose
+			private String name;
+			@Expose
+			private String telephone;
+			@Expose
+			private String haspda = "0";//是否有PDA 1：有 0：无
+			@Expose
+			private String deltag = "0";//删除标识位 1：已删除 0：未删除
+			@Expose
+			private String station;
+			@Expose
+			private String standard;
+			private Set decidedzones = new HashSet(0);
+			//...
+		}
+		```

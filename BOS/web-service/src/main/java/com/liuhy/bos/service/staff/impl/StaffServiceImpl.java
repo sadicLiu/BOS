@@ -27,7 +27,27 @@ public class StaffServiceImpl implements StaffService {
 
     @Override
     public void pageQuery(PageBean pageBean) {
-        //todo 实现dao之后调用
         staffDao.pageQuery(pageBean);
     }
+
+    /**
+     * 批量删除
+     */
+    public void deleteBatch(String ids) {
+        String[] staffIds = ids.split(",");
+        for (String id : staffIds) {
+            staffDao.executeUpdate("staff.delete", id);
+        }
+    }
+
+    @Override
+    public Staff findById(String id) {
+        return staffDao.findById(id);
+    }
+
+    @Override
+    public void update(Staff staff) {
+        staffDao.update(staff);
+    }
+
 }

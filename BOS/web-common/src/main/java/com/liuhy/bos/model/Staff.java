@@ -1,23 +1,28 @@
 package com.liuhy.bos.model;
 
+import com.google.gson.annotations.Expose;
+
 import java.util.HashSet;
 import java.util.Set;
 /**
  * 取派员实体
- * @author zhaoqx
  *
  */
 
 public class Staff implements java.io.Serializable {
-
-	// Fields
-
+	@Expose
 	private String id;
+	@Expose
 	private String name;
+	@Expose
 	private String telephone;
+	@Expose
 	private String haspda = "0";//是否有PDA 1：有 0：无
+	@Expose
 	private String deltag = "0";//删除标识位 1：已删除 0：未删除
+	@Expose
 	private String station;
+	@Expose
 	private String standard;
 	private Set decidedzones = new HashSet(0);
 
