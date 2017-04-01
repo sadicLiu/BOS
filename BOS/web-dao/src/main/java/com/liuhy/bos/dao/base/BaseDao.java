@@ -19,4 +19,6 @@ public interface BaseDao<T> {
     void executeUpdate(String namedQuery, Object... args);
 
     void pageQuery(PageBean pageBean);
+
+    void saveOrUpdate(T entity);
 }

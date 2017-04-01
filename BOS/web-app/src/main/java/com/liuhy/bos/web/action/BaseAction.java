@@ -1,5 +1,6 @@
 package com.liuhy.bos.web.action;
 
+import com.liuhy.bos.service.region.RegionService;
 import com.liuhy.bos.service.staff.StaffService;
 import com.liuhy.bos.service.user.UserService;
 import com.opensymphony.xwork2.ActionContext;
@@ -41,6 +42,7 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T>, Sess
     * */
     public UserService userService;
     public StaffService staffService;
+    public RegionService regionService;
 
     @Resource
     public void setUserService(UserService userService) {
@@ -52,9 +54,14 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T>, Sess
         this.staffService = staffService;
     }
 
+    @Resource
+    public void setRegionService(RegionService regionService) {
+        this.regionService = regionService;
+    }
+
     /*
-            * 值栈操作
-            * */
+                * 值栈操作
+                * */
     public void push(Object o) {
         ActionContext.getContext().getValueStack().push(o);
     }

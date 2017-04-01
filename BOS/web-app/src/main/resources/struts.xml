@@ -45,6 +45,10 @@
             <result name="list">WEB-INF/pages/base/staff.jsp</result>
         </action>
 
+        <!-- regionAction-->
+        <action name="regionAction_*" class="regionAction" method="{1}">
+
+        </action>
     </package>
 
     <!--<include file="struts-classes.xml"/>-->
